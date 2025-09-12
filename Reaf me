@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor White
+  BorderColor Black
+  ArrowColor Black
+}
+
+actor "Membro" as M
+actor "Administrador" as A
+
+M --> (Consultar catálogo)
+M --> (Devolver livro)
+M --> (Registrar data e hora)
+M --> (Requisitar empréstimo)
+M --> (Realizar empréstimo)
+
+A --> (Cadastrar novo livro)
+A --> (Verificar popularidade dos livros)
+
+(Realizar empréstimo) .u.> (Verificar popularidade dos livros) : <<extend>>
+(Verificar popularidade dos livros) .d.> (Perguntar para clientes\nquais eles gostam mais) : <<extend>>
+
+(Requisitar empréstimo) .d.> (Registrar data e hora) : <<extend>>
+
+note bottom of (Requisitar empréstimo)
+  • Registrar data e hora
+  • Registrar data de devolução prevista
+  • Sensor de controle
+end note
+
+@enduml
